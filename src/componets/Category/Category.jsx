@@ -1,6 +1,5 @@
-import React from 'react';
-function Category(category) {
-    const { categoryName, categoryImg } = category.category;
+function Category({category}) {
+    const { categoryName, categoryImg } = category;
     return (
         <>
             
