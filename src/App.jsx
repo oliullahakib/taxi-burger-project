@@ -2,10 +2,12 @@ import { Suspense } from 'react'
 import './App.css'
 import Banner from './componets/Banner/Banner'
 import OurFoods from './componets/OurFoods/OurFoods'
+import { ToastContainer} from 'react-toastify';
 
 const categoryPromiss = fetch("https://taxi-kitchen-api.vercel.app/api/v1/categories").then(res => res.json())
 const randomFoodsPromiss = fetch("https://taxi-kitchen-api.vercel.app/api/v1/foods/random").then(res => res.json())
 function App() {
+  
   return (
     <>
       <div className='bg-[url("https://i.ibb.co.com/5xMvW2tF/bg.png")] bg-fixed min-h-[100vh]'>
@@ -18,11 +20,11 @@ function App() {
             <OurFoods
               categoryPromiss={categoryPromiss}
               randomFoodsPromiss={randomFoodsPromiss}
-
+              
             />
           </Suspense>
         </div>
-
+        <ToastContainer position='top-center' />
       </div>
     </>
   )
