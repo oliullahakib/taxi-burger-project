@@ -8,11 +8,13 @@ function OurFoods({ categoryPromiss, randomFoodsPromiss  }) {
     const categoriesData = use(categoryPromiss)
     const [categoriesFoods, setCategoriesFoods] = useState([])
     const randomFoodsData = use(randomFoodsPromiss)
-    
+     const [activeCat, setActiveCat] = useState(0)
     const handleCategory = (id) => {
        const categoryFoods= randomFoodsData.foods.filter(food =>food.catId===id)
      setCategoriesFoods(categoryFoods)
+     setActiveCat(id)
     }
+    console.log(activeCat)
     const [cartFoods, setCartFoods] = useState([])
     const handleFood = (food) => {
         toast.success("Food is Added to Cart")
@@ -33,7 +35,7 @@ function OurFoods({ categoryPromiss, randomFoodsPromiss  }) {
                 <div className="category bg-amber-400 col-span-2 rounded-xl ">
                     <h2 className='text-2xl rounded-2xl text-black text-center bg-white mt-4 mb-8'>Category</h2>
                     {
-                        categoriesData.categories.map(category => <Category key={category.id} category={category} handleCategory={handleCategory} />)
+                        categoriesData.categories.map(category => <Category key={category.id} category={category} handleCategory={handleCategory} activeCat={activeCat} />)
                     }
                 </div>
                 <div className="food-section lg:col-span-7  px-3">
