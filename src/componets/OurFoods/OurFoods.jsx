@@ -6,14 +6,16 @@ import FoodCart from './FoodCart';
 import { toast } from 'react-toastify';
 function OurFoods({ categoryPromiss, randomFoodsPromiss  }) {
     const categoriesData = use(categoryPromiss)
+    const [categoriesFoods, setCategoriesFoods] = useState([])
     const randomFoodsData = use(randomFoodsPromiss)
-
+    
     const handleCategory = (id) => {
-      console.log(id)
+       const categoryFoods= randomFoodsData.foods.filter(food =>food.catId===id)
+     setCategoriesFoods(categoryFoods)
     }
     const [cartFoods, setCartFoods] = useState([])
     const handleFood = (food) => {
-        toast.success("Food is Added")
+        toast.success("Food is Added to Cart")
         setCartFoods([...cartFoods, food])
     }
     const handleDleletCart = (food) => {
@@ -38,7 +40,7 @@ function OurFoods({ categoryPromiss, randomFoodsPromiss  }) {
                     <h1 className='text-center text-2xl my-5'>Our Foods</h1>
 
                     {
-                        randomFoodsData.foods.map(food => <FoodsCard key={food.id} food={food} handleFood={handleFood} />)
+                       categoriesFoods.length!==0?categoriesFoods.map(food => <FoodsCard key={food.id} food={food} handleFood={handleFood} />) : randomFoodsData.foods.map(food => <FoodsCard key={food.id} food={food} handleFood={handleFood} />)
                     }
                 </div>
                 <div className="right lg:col-span-3 px-2 border-4 border-amber-400 rounded-xl bg-white">
